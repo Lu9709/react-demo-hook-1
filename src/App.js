@@ -2,16 +2,22 @@ import {useState,useEffect} from "react"
 
 function App() {
   const [n, setN] = useState(0);
-  const onClick = () => {
+  const [m, setM] = useState(0);
+  const onClickN = () => {
     setN(n + 1);
   }
+  const onClickM = () => {
+    setM(m + 1);
+  }
   useEffect(()=>{
-    console.log('use effect')
-  },[])
+    console.log('n和m change')
+  })
   return (
     <>
       {n}
-      <button onClick={onClick}>+1</button>
+      <button onClick={onClickN}>+1</button>
+      {m}
+      <button onClick={onClickM}>+1</button>
     </>)
 }
 
