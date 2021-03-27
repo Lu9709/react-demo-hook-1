@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {useState} from 'react'
 
 function App() {
-  const [n, setN] = useState(0)
+  const nRef = React.useRef(0)
   return (
     <div>
-      <p>{n}</p>
-      <button onClick={() => setN(n + 1)}>+1</button>
-      <button onClick={()=>setTimeout(()=>{console.log(`n:${n}`)},1000)}>log</button>
+      <p>{nRef.current} 这里不能实时跟新</p>
+      <button onClick={() => (nRef.current += 1)}>+1</button>
+      {console.log(`${nRef.current}`)}
+      <button onClick={()=>console.log(`n:${nRef.current}`)}>log</button>
     </div>
   )
 }
