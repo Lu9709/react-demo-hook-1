@@ -1,26 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {useState} from 'react'
 
-
-let _state
-const myUseState = (init) => {
-  _state = _state === undefined ? init : _state
-  const setState = (newValue) => {
-    _state = newValue
-    render()
-  }
-  return [_state, setState]
-
-}
-const render = () => {
-  ReactDOM.render(<App/>, document.getElementById('root'))
-}
 function App() {
-  const [n, setN] = myUseState(0)
+  const [n, setN] = useState(0)
   return (
     <div>
-      {n}
+      <p>{n}</p>
       <button onClick={() => setN(n + 1)}>+1</button>
+      <button onClick={()=>setTimeout(()=>{console.log(`n:${n}`)},1000)}>log</button>
     </div>
   )
 }
