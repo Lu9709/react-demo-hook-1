@@ -1,25 +1,19 @@
-import {useState,useEffect} from "react"
+import {useState} from "react"
+import useUpdate from "./useUpdate"
+
 
 function App() {
-  const [ChildVisible, setChildVisible] = useState(true)
-  const show = ()=>{
-    setChildVisible(true)
+  const [n,setN] = useState(0)
+  onclick = ()=>{
+    setN(n+1)
   }
-  const hide = ()=>{
-    setChildVisible(false)
-  }
-  return (
+  useUpdate(()=>{
+    console.log('number change')},[n]);
+  return(
     <div>
-      {ChildVisible ?<button onClick={hide}>hide</button>: <button onClick={show}>show</button> }
-      {ChildVisible ? <Child/> : null}
+      {n}
+      <button onClick={onclick}>+1</button>
     </div>
   )
-}
-const Child = (props) => {
-  useEffect(()=>{
-    console.log('child渲染或变化了')
-    return ()=>{ console.log('child消失了')}
-  })
-  return (<div>Child</div>)
 }
 export default App;
