@@ -1,24 +1,25 @@
 import {useState,useEffect} from "react"
 
 function App() {
-  const [n, setN] = useState(0);
-  const [m, setM] = useState(0);
-  const onClickN = () => {
-    setN(n + 1);
+  const [ChildVisible, setChildVisible] = useState(true)
+  const show = ()=>{
+    setChildVisible(true)
   }
-  const onClickM = () => {
-    setM(m + 1);
+  const hide = ()=>{
+    setChildVisible(false)
   }
-  useEffect(()=>{
-    console.log('n和m change')
-  })
   return (
-    <>
-      {n}
-      <button onClick={onClickN}>+1</button>
-      {m}
-      <button onClick={onClickM}>+1</button>
-    </>)
+    <div>
+      {ChildVisible ?<button onClick={hide}>hide</button>: <button onClick={show}>show</button> }
+      {ChildVisible ? <Child/> : null}
+    </div>
+  )
 }
-
+const Child = (props) => {
+  useEffect(()=>{
+    console.log('child渲染或变化了')
+    return ()=>{ console.log('child消失了')}
+  })
+  return (<div>Child</div>)
+}
 export default App;
