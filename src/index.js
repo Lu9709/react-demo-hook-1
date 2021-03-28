@@ -1,28 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {useState,useEffect,useRef,useLayoutEffect} from 'react'
 
 
 function App() {
-  const [n,seN] = useState(0)
-  const time = useRef(null)
-  const onclick = ()=>{
-    seN(n+1)
-    time.current = performance.now()
-  }
-  useLayoutEffect(()=>{
-    if(time.current){
-      console.log( performance.now()-time.current)
-    }
-  })
-  return(
-    <div>
-      {n}
-    <button onClick={onclick}>+1</button>
+  const [n, setN] = React.useState(0);
+  const [m, setM] = React.useState(0);
+  const onClick = () => {
+    setN(n + 1);
+  };
+
+  return (
+    <div className="App">
+      <div>
+        <button onClick={onClick}>update n {n}</button>
+      </div>
+      <Child2 data={m}/>
+      {/* <Child2 data={m}/> */}
     </div>
-  )
+  );
 }
 
+function Child(props) {
+  console.log("child 执行了");
+  console.log('假设这里有大量代码')
+  return <div>child: {props.data}</div>;
+}
+
+const Child2 = React.memo(Child);
 ReactDOM.render(
   <>
     <App/>
