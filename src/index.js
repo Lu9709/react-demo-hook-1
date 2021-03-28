@@ -3,23 +3,22 @@ import ReactDOM from 'react-dom';
 
 
 function App() {
-  const [n, setN] = React.useState(0);
-  const count = React.useRef(0)
-  const onClick = () => {
-    setN(n + 1);
-  };
-  React.useEffect(
-    ()=>{
-      count.current +=1
-      console.log(count.current)
-    }
-  )
+  const buttonRef = React.useRef(null);
   return (
     <div className="App">
-        <button onClick={onClick}>update n {n}</button>
+      <Button ref={buttonRef}>按钮</Button>
     </div>
   );
 }
+// const Button3 = React.forwardRef((props, ref) => {
+//   console.log(props);
+//   console.log(ref)
+//   return <button className="red" ref={ref} {...props} />;
+//
+// });
+const Button = React.forwardRef((props,ref)=>{
+  return <button className='red' ref={ref} {...props}/>
+})
 ReactDOM.render(
   <>
     <App/>
