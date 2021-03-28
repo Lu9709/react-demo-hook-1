@@ -1,45 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {useContext} from 'react'
+import {useState,useEffect,useRef,useLayoutEffect} from 'react'
 
-
-const themes = {
-  light: {
-    foreground: "#000000",
-    background: "#eeeeee"
-  },
-  dark: {
-    foreground: "#ffffff",
-    background: "#222222"
-  }
-};
-
-const ThemeContext = React.createContext(themes.light);
 
 function App() {
-  return (
-    <ThemeContext.Provider value={themes.dark}>
-      <Toolbar />
-    </ThemeContext.Provider>
-  );
-}
-
-function Toolbar(props) {
-  return (
+  const [n,seN] = useState(0)
+  const time = useRef(null)
+  const onclick = ()=>{
+    seN(n+1)
+    time.current = performance.now()
+  }
+  useLayoutEffect(()=>{
+    if(time.current){
+      console.log( performance.now()-time.current)
+    }
+  })
+  return(
     <div>
-      <ThemedButton />
+      {n}
+    <button onClick={onclick}>+1</button>
     </div>
-  );
+  )
 }
 
-function ThemedButton() {
-  const theme = useContext(ThemeContext);
-  return (
-    <button style={{ background: theme.background, color: theme.foreground }}>
-      I am styled by theme context!
-    </button>
-  );
-}
 ReactDOM.render(
   <>
     <App/>
